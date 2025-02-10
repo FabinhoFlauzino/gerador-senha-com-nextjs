@@ -1,9 +1,18 @@
 "use client"
 
+import Checkbox from "@/components/Checkbox"
+import opcoes from "@/data/OpcoesCaracteres"
 import { useState } from "react"
 
 export default function Home() {
-  const [tamanho, setTamanho] = useState<Number>(8)
+  const [tamanho, setTamanho] = useState<number>(8)
+  const [tiposCaracteres, setTiposCaracteres] = useState(opcoes)
+
+  const lidaComMudancaChange = (indice: number) => {
+    const aux = [...tiposCaracteres]
+    aux[indice].valor = !aux[indice].valor
+    setTiposCaracteres([...aux])
+  }
 
   return (
     <main className="flex flex-col items-center justify-center h-full">
@@ -21,6 +30,20 @@ export default function Home() {
             value={tamanho}
             onChange={(e) => setTamanho(+e.target.value)}
           />
+        </div>
+        <div>
+          {
+            tiposCaracteres.map((tipo, index) => (
+              <Checkbox
+                id={`${tipo.nome}-${index}`}
+                key={tipo.id}
+                selecionado={tipo.valor}
+                lidaComMudanca={() => lidaComMudancaChange(index)}
+                texto={tipo.nome}
+              />
+            ))
+          }
+
         </div>
       </div>
     </main>
