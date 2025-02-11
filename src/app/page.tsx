@@ -2,14 +2,20 @@
 
 import Checkbox from "@/components/Checkbox"
 import ExibeSenha from "@/components/ExibeSenha"
+import ForcaSenha from "@/components/ForcaSenha"
 import opcoes from "@/data/OpcoesCaracteres"
 import Senha from "@/model/Senha"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Home() {
   const [tamanho, setTamanho] = useState<number>(8)
   const [tiposCaracteres, setTiposCaracteres] = useState(opcoes)
   const [senha, setSenha] = useState("")
+  const [forcaSenha, setForcaSenha] = useState(3)
+
+  useEffect(() => {
+    setForcaSenha(Senha.calcularForca(tamanho, tiposCaracteres))
+  }, [tamanho, tiposCaracteres])
 
   const lidaComMudancaChange = (indice: number) => {
     const aux = [...tiposCaracteres]
@@ -52,6 +58,9 @@ export default function Home() {
             ))
           }
         </div>
+
+        <ForcaSenha forca={forcaSenha} />
+
         <button className="
           text-white bg-blue-500 text-lg font-bold 
           w-full rounded-md p-2 mt-3
