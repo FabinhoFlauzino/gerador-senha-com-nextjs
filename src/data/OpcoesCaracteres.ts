@@ -1,10 +1,11 @@
+import IdCaracteres from "@/model/IdsCaracteres"
 import OpcaoCaractere from "@/model/OpcaoCaracteres"
 
 const opcoes: OpcaoCaractere[] = [
-  { id: 'numeros', nome: "Números", valor: false },
-  { id: 'maiusculas', nome: "Letras Maiúsculas", valor: false },
-  { id: 'minusculas', nome: "Letras Minúsculas", valor: false },
-  { id: 'especiais', nome: "Caractéres Especiais", valor: false },
+  { id: IdCaracteres.NUMEROS, nome: "Números", valor: false },
+  { id: IdCaracteres.MAIUSCULAS, nome: "Letras Maiúsculas", valor: false },
+  { id: IdCaracteres.MINUSCULAS, nome: "Letras Minúsculas", valor: false },
+  { id: IdCaracteres.ESPECIAIS, nome: "Caractéres Especiais", valor: false },
 ]
 
 export default opcoes

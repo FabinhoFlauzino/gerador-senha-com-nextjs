@@ -2,16 +2,23 @@
 
 import Checkbox from "@/components/Checkbox"
 import opcoes from "@/data/OpcoesCaracteres"
+import Senha from "@/model/Senha"
 import { useState } from "react"
 
 export default function Home() {
   const [tamanho, setTamanho] = useState<number>(8)
   const [tiposCaracteres, setTiposCaracteres] = useState(opcoes)
+  const [senha, setSenha] = useState("")
 
   const lidaComMudancaChange = (indice: number) => {
     const aux = [...tiposCaracteres]
     aux[indice].valor = !aux[indice].valor
     setTiposCaracteres([...aux])
+  }
+
+  const gerarSenha = () => {
+    const novaSenha = Senha.gerarSenha(tamanho, tiposCaracteres)
+    setSenha(novaSenha)
   }
 
   return (
@@ -43,8 +50,16 @@ export default function Home() {
               />
             ))
           }
-
         </div>
+        <button className="
+          text-white bg-blue-500 text-lg font-bold 
+          w-full rounded-md p-2 mt-3
+        "
+          onClick={gerarSenha}
+        >
+          Gerar Senha
+        </button>
+        {senha}
       </div>
     </main>
   )
